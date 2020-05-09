@@ -3,10 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 
 var indexRouter = require('./routes/index');
 
-var app = express();
+var PORT = process.env.PORT || 3000;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,6 +37,21 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+io.on('connection', function(client) {
+  console.log(`A user is connected. Client id: ${client.id}`);
+  client.on('joinRoom', function(room) {
+    let roomName = room.roomName;
+    client.join(roomName);
+    console.log(`room number ${roomName}`);
+    client.on('messages', function(msg) {
+      io.to(roomName).emit('messages', 'Hello from the server.');
+    });
+  });
+});
+server.listen(PORT, function(){
+  console.log(`Local Tester running at http://localhost:${PORT}`);
 });
 
 module.exports = app;

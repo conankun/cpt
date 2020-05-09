@@ -1,5 +1,22 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div(class="row mb-2")
+    div(class="col-md-6 col-12")
+      div(class="form-group row mb-0")
+        label(for="language" class="col-3 col-form-label")
+          span
+            | Language
+        select(class="form-control" class="col-9" id="language")
+          option C++ 11
+          option C++ 14
+          option C++ 17
+    div(class="col-md-6 col-12 content-header")
+      button(type="button" class="btn btn-success" id="gradeButton")
+        | Grade
+  div(class="row")
+    div(class="col-md-6 col-12")
+      div(id="editor")
+    div(class="col-md-6 col-12")
+      div(id="terminal")
+  script(src="/javascripts/code_highlighter.js")
