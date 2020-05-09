@@ -1,0 +1,75 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.53.0/codemirror.min.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.53.0/theme/monokai.css")
+    link(rel="stylesheet" href="/stylesheets/style.css")
+    script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous")
+    script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.53.0/codemirror.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.53.0/mode/javascript/javascript.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.53.0/mode/clike/clike.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.53.0/mode/shell/shell.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.53.0/addon/selection/active-line.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.53.0/addon/edit/matchbrackets.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.53.0/keymap/sublime.js")
+    script(src="/javascripts/components.js")
+    title= title
+  body
+    nav(class="navbar navbar-expand-sm navbar-light" style="background-color: #e3f2fd;")
+      a(class="navbar-brand" href="#") #{title}
+      button(class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle Navigation")
+          span(class="navbar-toggler-icon")
+      div(class="collapse navbar-collapse" id="navbarText")
+        ul(class="navbar-nav mr-auto")
+          li(class="nav-item dropdown active")
+            a(class="nav-link dropdown-toggle"
+              href="#" id="navbarDropdownMenuLink"
+              role="button" data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false") Problems
+            div(class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink")
+              each problem in problems
+                a(class="dropdown-item" href="/#{problem}") #{problem}
+        button(class="btn btn-outline-success my-2 my-sm-0 mr-2" id="uploadTestData")
+          | Add Test Data
+        button(class="btn btn-outline-danger my-2 my-sm-0" id="createProblemModalTrigger")
+          | Start New Problem
+    div(class="container ml-0 mr-0 mt-2")
+      block content
+      div(class="modal fade"
+          id="createProblemModal"
+          role="dialog"
+          tabindex = "-1"
+          aria-labelledby="createProblemModalLabel"
+          aria-hidden="true")
+          div(class="modal-dialog" role="document")
+            div(class="modal-content")
+              div(class="modal-header")
+                h5(class="modal-title" id="createProblemModalLabel")
+                  | Create a problem
+                button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                  span(aria-hidden="true")
+                    | &times;
+              div(class="modal-body")
+                |  Create a form that takes in problem name, whether user wants to
+                |  link their src file (and if so show the input for this), and
+                |  language.
+              div(class="modal-footer")
+                buton(type="button" class="btn btn-secondary" data-dismiss="modal")
+                  | Close
+                button(type="button" class="btn btn-primary")
+                  |  Save
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js")
+    script(src="/javascripts/socketio.js")

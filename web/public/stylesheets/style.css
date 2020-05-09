@@ -1,0 +1,25 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+body {
+    font-family: "Nanum Gothic", sans-serif;
+}
+.container {
+    max-width: none !important;
+}
+.CodeMirror {
+    height: 100% !important;
+    font-family: "Nanum Gothic", sans-serif;
+}
+#gradeButton {
+    margin-left: auto;
+}
+.content-header {
+    display: flex;
+}
+body.modal-open .modal {
+    display: flex !important;
+    height: 100%;
+    align-items: center;
+}
+body.modal-open .modal .modal-dialog {
+    margin: auto;
+}
